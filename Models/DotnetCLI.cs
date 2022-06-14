@@ -7,11 +7,10 @@ public class DotnetCLI
     [Required]
     public int Id { get; set; }
     [Required]
-    public string Template { get; set; }
-    [Required]
     public string ShortName { get; set; }
-    [Required]
-    public string Tags { get; set; }//dataset?
-    public string Description { get; set; }
+    public string? Template { get; set; }
+    public string? Tags { get; set; }//dataset?
+    public string? Group { get; set; }//dataset?
+    public string? Description { get; set; }
 
 }

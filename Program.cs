@@ -4,7 +4,7 @@ using Notebook.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlite());
+builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlite("Data Source=Database.db"));
 
 builder.Services.AddScoped<IDotnetCLIRepository, DotnetCLIRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -23,8 +23,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//Seed
 //app.UseHttpsRedirection();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetService<AppDbContext>();
+    context.Database.Migrate();//миграции в рантайме не безопасны так как могут приходить от сразу от нескольких инстансов
+}
+SeedTestData.RollUp(app);//в development?
 
 app.UseAuthorization();
 

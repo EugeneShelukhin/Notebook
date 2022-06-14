@@ -6,7 +6,7 @@ namespace Notebook.Data
     {
         bool SaveChanges();
         IEnumerable<DotnetCLI> GetAll();
-        IEnumerable<DotnetCLI> GetById(int id);
+        DotnetCLI? GetById(int id);
         void Create(DotnetCLI model);
     }
 }
