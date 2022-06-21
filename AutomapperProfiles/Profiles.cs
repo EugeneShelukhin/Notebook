@@ -1,6 +1,6 @@
 using AutoMapper;
-using Models;
 using Notebook.DTOs;
+using Notebook.Models;
 
 namespace Notebook.Controllers.AutomapperProfiles
 {
@@ -8,8 +8,10 @@ namespace Notebook.Controllers.AutomapperProfiles
     {
         public Profiles()
         {
-            CreateMap<DotnetCLI, DotnetCLIReadDTO>();
-            CreateMap<DotnetCLICreateDTO, DotnetCLI>();
+            CreateMap<Article, ArticleReadDTO>();
+            CreateMap<ArticleCreateDTO, Article>();
+            CreateMap<Topic, TopicReadDTO>();
+            CreateMap<TopicCreateDTO, Topic>();
         }
     }
 }

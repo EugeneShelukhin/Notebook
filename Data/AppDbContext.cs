@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Models;
+using Notebook.Models;
 
 namespace Notebook.Data
 {
@@ -10,6 +10,7 @@ namespace Notebook.Data
 
         }
 
-        public DbSet<DotnetCLI> DotnetCLIs { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Topic> Topics { get; set; }
     }
 }

@@ -1,12 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Notebook.Data;
+using Notebook.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlite("Data Source=Database.db"));
 
-builder.Services.AddScoped<IDotnetCLIRepository, DotnetCLIRepository>();
+builder.Services.AddScoped<IArticlesRepository, ArticlesRepository>();
+builder.Services.AddScoped<ITopicsRepository, TopicsRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddControllers();

@@ -1,4 +1,4 @@
-using Models;
+using Notebook.Models;
 
 namespace Notebook.Data
 {
@@ -14,13 +14,27 @@ namespace Notebook.Data
 
         private static void SeedData(AppDbContext? appDbContext)
         {
-            if (appDbContext.DotnetCLIs.Any())
+            if (appDbContext.Articles.Any())
             {
                 return;
             }
-            appDbContext?.DotnetCLIs.AddRange(new DotnetCLI() { Group = "dotnet new <TEMPLATE>", ShortName = "console", Description = "", Template = "" },
-            new DotnetCLI() { Group = "dotnet new <TEMPLATE>", ShortName = "webapi", Description = "", Template = "" },
-            new DotnetCLI() { Group = "dotnet new <TEMPLATE>", ShortName = "web", Description = "", Template = "" }
+            var dotnetNiewTopic = new Topic() { Title = "dotnet new <TEMPLATE>" };
+
+            appDbContext.Topics.Add(new Topic()
+            {
+                Title = "C#",
+                NestedTopics = new List<Topic>(){
+                    new Topic() {Title="Dotnet CLI",
+                        NestedTopics=new List<Topic>(){
+                            dotnetNiewTopic
+                        }}
+                }
+            });
+            appDbContext.SaveChanges();
+
+            appDbContext.Articles.AddRange(new Article() { Title = "console", Description = "", TopicId = dotnetNiewTopic.Id },
+            new Article() { Title = "webapi", Description = "", TopicId = dotnetNiewTopic.Id },
+            new Article() { Title = "web", Description = "", TopicId = dotnetNiewTopic.Id }
             );
             appDbContext.SaveChanges();
         }
