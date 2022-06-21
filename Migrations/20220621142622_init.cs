@@ -31,23 +31,22 @@ namespace Notebook.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    ParentTopicId = table.Column<string>(type: "TEXT", nullable: true),
-                    ParentTopicId1 = table.Column<int>(type: "INTEGER", nullable: true)
+                    ParentTopicId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Topics", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Topics_Topics_ParentTopicId1",
-                        column: x => x.ParentTopicId1,
+                        name: "FK_Topics_Topics_ParentTopicId",
+                        column: x => x.ParentTopicId,
                         principalTable: "Topics",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Topics_ParentTopicId1",
+                name: "IX_Topics_ParentTopicId",
                 table: "Topics",
-                column: "ParentTopicId1");
+                column: "ParentTopicId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

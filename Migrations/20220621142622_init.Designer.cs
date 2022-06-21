@@ -11,7 +11,7 @@ using Notebook.Data;
 namespace Notebook.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220617104454_init")]
+    [Migration("20220621142622_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,10 +49,7 @@ namespace Notebook.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ParentTopicId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("ParentTopicId1")
+                    b.Property<int?>("ParentTopicId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -61,7 +58,7 @@ namespace Notebook.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentTopicId1");
+                    b.HasIndex("ParentTopicId");
 
                     b.ToTable("Topics");
                 });
@@ -70,7 +67,7 @@ namespace Notebook.Migrations
                 {
                     b.HasOne("Notebook.Models.Topic", "ParentTopic")
                         .WithMany("NestedTopics")
-                        .HasForeignKey("ParentTopicId1");
+                        .HasForeignKey("ParentTopicId");
 
                     b.Navigation("ParentTopic");
                 });
